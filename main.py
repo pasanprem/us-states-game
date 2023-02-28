@@ -29,6 +29,7 @@ print(y_cor)
 #===================
 #Write state name
 t.penup()
+t.hideturtle()
 t.goto(int(x_cor), int(y_cor))
 t.write(answer_state)
 
