@@ -8,30 +8,31 @@ screen.addshape(image)
 turtle.shape(image)
 
 t = turtle.Turtle()
-
-answer_state = screen.textinput(title="Guess State", prompt="What is another state?")
-
-data = pd.read_csv("50_states.csv")
-state_name_list = data.state.tolist()
-
-for x in state_name_list:
-    if answer_state.lower() == x.lower():
-        print("in list")
-    else:
-        continue
-
-x_cor = (data[(data.state) == answer_state]).loc[:,"x"]
-y_cor = (data[(data.state) == answer_state]).loc[:,"y"]
-
-print(type(int(x_cor)))
-print(y_cor)
-
-#===================
-#Write state name
 t.penup()
 t.hideturtle()
-t.goto(int(x_cor), int(y_cor))
-t.write(answer_state)
+game_on = True
+score = 0
+
+while game_on:
+    answer_state = (screen.textinput(title=f"Guess State {score}/50", prompt="What is another state?")).title()
+
+    data = pd.read_csv("50_states.csv")
+
+    state_name_list = data.state.tolist()
+    for x in state_name_list:
+        if answer_state.lower() == x.lower():
+            x_cor = (data[(data.state) == answer_state]).loc[:, "x"]
+            y_cor = (data[(data.state) == answer_state]).loc[:, "y"]
+            t.goto(int(x_cor), int(y_cor))
+            t.write(answer_state)
+            score += 1
+        else:
+            continue
+
+    #===================
+    #Write state name
+
+
 
 
 turtle.mainloop()
