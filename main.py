@@ -10,11 +10,12 @@ turtle.shape(image)
 t = turtle.Turtle()
 t.penup()
 t.hideturtle()
-game_on = True
-score = 0
+# game_on = True
+# score = 0
+guessed_states = []
 
-while game_on:
-    answer_state = (screen.textinput(title=f"Guess State {score}/50", prompt="What is another state?")).title()
+while len(guessed_states) < 50:
+    answer_state = (screen.textinput(title=f"Guess State {len(guessed_states)}/50", prompt="What is another state?")).title()
 
     data = pd.read_csv("50_states.csv")
 
@@ -25,7 +26,8 @@ while game_on:
             y_cor = (data[(data.state) == answer_state]).loc[:, "y"]
             t.goto(int(x_cor), int(y_cor))
             t.write(answer_state)
-            score += 1
+            # score += 1
+            guessed_states.append(answer_state)
         else:
             continue
 
