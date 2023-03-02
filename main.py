@@ -21,7 +21,7 @@ while len(guessed_states) < 50:
 
     state_name_list = data.state.tolist()
     for x in state_name_list:
-        if answer_state.lower() == x.lower():
+        if (answer_state.lower() == x.lower()) and (x not in guessed_states):
             x_cor = (data[(data.state) == answer_state]).loc[:, "x"]
             y_cor = (data[(data.state) == answer_state]).loc[:, "y"]
             t.goto(int(x_cor), int(y_cor))
